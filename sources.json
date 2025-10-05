@@ -521,6 +521,24 @@
         "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.2.22/bun-linux-x64.zip",
         "hash": "sha256-TERq8aAde0Dh4RuuvDUvmyv9Eoh+Ubl907WYec7idDo="
       }
+    },
+    "1.2.23": {
+      "aarch64-darwin": {
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.2.23/bun-darwin-aarch64.zip",
+        "hash": "sha256-IvX6P/9ysNO45+D4BR7K3y5Bkg1HSsYttSeRRICckAU="
+      },
+      "x86_64-darwin": {
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.2.23/bun-darwin-x64.zip",
+        "hash": "sha256-lynEAOULw8hrZkDkKvL/XAV7XfOyfJO0DtR8FrXmpeY="
+      },
+      "aarch64-linux": {
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.2.23/bun-linux-aarch64.zip",
+        "hash": "sha256-anqYxUbQhKhF3tpi6ypblKahSmPqgc+RhtRr9Vv5EKk="
+      },
+      "x86_64-linux": {
+        "url": "https://github.com/oven-sh/bun/releases/download/bun-v1.2.23/bun-linux-x64.zip",
+        "hash": "sha256-zw7QqSB5nVdv/eTgyuZtcyvyPCUwQH8m9Zx4Md/+Hw4="
+      }
     }
   }
 }
