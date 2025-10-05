@@ -31,9 +31,10 @@ jobs:
           commit-message: "Update Bun Sources"
           delete-branch: true
           body: |
-            Automatically created update
+            Automatically created update of sources.json
       - name: Enable Pull Request Automerge
         uses: peter-evans/enable-pull-request-automerge@v3
         if: ${{ steps.create-pull-request.outputs.pull-request-operation == 'created' }}
         with:
           pull-request-number: ${{ steps.create-pull-request.outputs.pull-request-number }}
+          merge-method: rebase
