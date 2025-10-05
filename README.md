@@ -11,6 +11,6 @@ TODO)) Write usage instructions.
 - [ ] Update `sources.json` automatically (github actions)
   - [x] Check if new version is available: https://github.com/oven-sh/bun/releases
   - [x] Calculate sha256 checksums for new releases
-  - [ ] Add version to `sources.json`
+  - [x] Add version to `sources.json`
   - [ ] Check flake
   - [ ] Create PR
