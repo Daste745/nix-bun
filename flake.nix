@@ -14,12 +14,12 @@
         pkgs:
         let
           sources = builtins.fromJSON (builtins.readFile ./sources.json);
-          getSource = version: system: pkgs.fetchurl (sources.versions.${version}.systems.${system});
+          getSource = systems: pkgs.fetchurl (systems.${pkgs.system});
           getOverride =
-            version: system:
+            version: systems:
             pkgs.bun.overrideAttrs {
               inherit version;
-              src = getSource version system;
+              src = getSource systems;
             };
         in
         pkgs.lib.mapAttrs getOverride sources.versions
