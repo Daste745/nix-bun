@@ -97,7 +97,9 @@ async function loadSources(): Promise<Sources> {
 
 async function saveSources(sources: Sources): Promise<void> {
 	const file = Bun.file("sources.json");
-	await file.write(JSON.stringify(sources, null, 2));
+	const writer = file.writer();
+	writer.write(JSON.stringify(sources, null, 2));
+	writer.write("\n");
 }
 
 function parseTagVersion(tag: string): Version {
