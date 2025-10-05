@@ -4,7 +4,7 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }:
+    { nixpkgs, ... }:
     let
       systems = [ "aarch64-darwin" ];
       eachSystem = f: nixpkgs.lib.genAttrs systems (system: f (import nixpkgs { inherit system; }));
@@ -25,16 +25,10 @@
         pkgs.lib.mapAttrs getOverride sources.versions
       );
 
-      devShells = eachSystem (
-        pkgs:
-        let
-          bun = self.packages.${pkgs.system};
-        in
-        {
-          default = pkgs.mkShell {
-            packages = [ bun."1.2.22" ];
-          };
-        }
-      );
+      devShells = eachSystem (pkgs: {
+        default = pkgs.mkShell {
+          packages = [ pkgs.bun ];
+        };
+      });
     };
 }
