@@ -18,9 +18,7 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Run update script
-        run: |
-          nix develop
-          bun run scripts/update.ts
+        run: nix develop -c bun run scripts/update.ts
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Check flake
