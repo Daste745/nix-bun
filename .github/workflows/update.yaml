@@ -1,0 +1,41 @@
+name: Update Sources
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@v31
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run update script
+        run: |
+          nix develop
+          bun run scripts/update.ts
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check flake
+        run: nix flake check --keep-going --show-trace
+      - name: Create Pull Request
+        id: create-pull-request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          title: "Update Bun Sources"
+          commit-message: "Update Bun Sources"
+          delete-branch: true
+          body: |
+            Automatically created update
+      - name: Enable Pull Request Automerge
+        uses: peter-evans/enable-pull-request-automerge@v3
+        if: ${{ steps.create-pull-request.outputs.pull-request-operation == 'created' }}
+        with:
+          pull-request-number: ${{ steps.create-pull-request.outputs.pull-request-number }}
