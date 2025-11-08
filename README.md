@@ -4,7 +4,35 @@ Nix flake with all bun versions.
 
 ## Usage
 
-TODO)) Write usage instructions.
+This flake exposes all bun versions as separate packages. You can access them via `packages.${system}."version"`.
+
+### devShell in a flake
+
+```nix
+{
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    bun = {
+      url = "github:Daste745/nix-bun";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
+
+  outputs =
+    inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import inputs.nixpkgs { inherit system; };
+      bun = inputs.bun.packages.${system};
+    in
+    {
+      devShells.${system}.default = pkgs.mkShell {
+        # All versions can be accessed via `bun."version"`
+        packages = [ bun."1.3.0" ];
+      };
+    };
+}
+```
 
 ## References
 
