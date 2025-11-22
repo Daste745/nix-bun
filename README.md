@@ -34,6 +34,14 @@ This flake exposes all bun versions as separate packages. You can access them vi
 }
 ```
 
+### Nix shell
+
+Use `#'"version"'` to select a specific version of Bun:
+
+```sh
+# nix shell github:Daste745/nix-bun#'"1.3.0"'
+```
+
 ## References
 
 - [oven-sh/bun](https://github.com/oven-sh/bun)
