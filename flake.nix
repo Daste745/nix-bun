@@ -15,21 +15,7 @@
       eachSystem = f: nixpkgs.lib.genAttrs systems (system: f (import nixpkgs { inherit system; }));
     in
     {
-      packages = eachSystem (
-        pkgs:
-        let
-          sources = builtins.fromJSON (builtins.readFile ./sources.json);
-          system = pkgs.stdenv.hostPlatform.system;
-          getSource = systems: pkgs.fetchurl (systems.${system});
-          getOverride =
-            version: systems:
-            pkgs.bun.overrideAttrs {
-              inherit version;
-              src = getSource systems;
-            };
-        in
-        pkgs.lib.mapAttrs getOverride sources.versions
-      );
+      packages = eachSystem (pkgs: import ./default.nix { inherit pkgs; });
 
       devShells = eachSystem (pkgs: {
         default = pkgs.mkShell {
